@@ -39,7 +39,8 @@ spec:
         {{.sessLabel}}
         role: monitor
     spec:
-      # tolerations:
+      tolerations:
+			- operator: Exists
       # # this toleration is to have the daemonset runnable on master nodes
       # # remove it if your masters can't run pods
       # - key: node-role.kubernetes.io/master

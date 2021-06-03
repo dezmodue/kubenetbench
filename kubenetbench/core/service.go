@@ -20,19 +20,20 @@ var serviceYamlTemplate = template.Must(template.New("service").Parse(`apiVersio
 kind: Deployment
 metadata:
   name: knb-deployment
-  labels : {
-    {{.runLabel}},
-  }
+  labels:
+    {{.runLabel}}
+    role: srv
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{.runLabel}},
+      {{.runLabel}}
+      role: srv
   template:
     metadata:
-      labels : {
-        {{.runLabel}},
-      }
+      labels:
+        {{.runLabel}}
+        role: srv
     spec:
       {{.srvSpec}}
       containers:
@@ -42,13 +43,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: knb-service
-  labels : {
-    {{.runLabel}},
-    role: srv,
-  }
+  labels: 
+    {{.runLabel}}
+    role: srv
 spec:
   selector:
-    {{.runLabel}},
+    {{.runLabel}}
     role: srv
   ports:
     {{.srvPorts}}
